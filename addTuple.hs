@@ -3,6 +3,8 @@
 
 addTuple (x,y) = x + y
 
-turnToList xs = map addTuple xs
+oneListOfTuples xs = map addTuple xs
 
-main = print(turnToList [(1,4),(1,5),(1,6)])
+turnToList xss = map oneListOfTuples xss 
+
+main = print(turnToList [[(1,4),(1,5),(1,6)], [(2,4),(2,5),(2,6)]])
