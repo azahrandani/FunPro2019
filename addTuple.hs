@@ -3,4 +3,6 @@
 
 addTuple (x,y) = x + y
 
-main = print(addTuple((9,3)))
+turnToList xs = map addTuple xs
+
+main = print(turnToList [(1,4),(1,5),(1,6)])
