@@ -16,3 +16,7 @@ aFunction expr = expr :+ C 1
 exprFoldr :: (Expr -> Expr -> Expr) -> Expr -> [Expr] -> Expr
 exprFoldr op init [] = init
 exprFoldr op init (x:xs) = op x (exprFoldr op init xs)
+
+theFunction expr1 expr2 = expr1
+
+main = print(exprFoldr theFunction (C 0) [C 16, C 2, C 3, C 10])
