@@ -37,7 +37,6 @@ minuss x y = x-y
 multiplyy x y = x*y
 dividee x y = x/y
 
--- evaluate (e1 :+ e2) = unConstant(exprFoldr summ (C 0) (e1 : [e2]))
+evaluate (e1 :+ e2) = unConstant(exprFoldr summ (C 0) (e1 : [e2]))
 
--- main = print(evaluate(C 1 :+ C 2))
-main = print(exprFoldr summ (C 0) [C 1, C 2])
+main = print(evaluate(C 1 :+ C 2))
