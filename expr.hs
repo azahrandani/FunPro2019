@@ -29,11 +29,11 @@ theFunction expr1 expr2 = expr1
 
 unConstant (C x) = x
 
-sum x y = x+y
-minus x y = x-y
-multiply x y = x*y
-divide x y = x/y
+summ x y = x+y
+minuss x y = x-y
+multiplyy x y = x*y
+dividee x y = x/y
 
-evaluate (e1 :+ e2) = exprFoldr sum 0 (e1 : e2)
+evaluate (e1 :+ e2) = exprFoldr summ 0 (e1 : [e2])
 
 main = print(evaluate(C 1 :+ C 2))
