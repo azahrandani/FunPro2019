@@ -30,13 +30,15 @@ theFunction expr1 expr2 = expr1
 unConstant :: Expr -> Float
 unConstant (C x) = x
 
--- summ :: Expr -> Expr -> Expr
+summ :: Expr -> Expr -> Expr
 summ e1 e2 = C (unConstant e1 + unConstant e2)
-
-minuss x y = x-y
-multiplyy x y = x*y
-dividee x y = x/y
+minuss e1 e2 = C (unConstant e1 - unConstant e2)
+multiplyy e1 e2 = C (unConstant e1 * unConstant e2)
+dividee e1 e2 = C (unConstant e1 / unConstant e2)
 
 evaluate (e1 :+ e2) = unConstant(exprFoldr summ (C 0) (e1 : [e2]))
+evaluate (e1 :- e2) = unConstant(exprFoldr minuss (C 0) (e1 : [e2]))
+evaluate (e1 :* e2) = unConstant(exprFoldr multiplyy (C 1) (e1 : [e2]))
+evaluate (e1 :/ e2) = unConstant(exprFoldr dividee (C 1) (e1 : [e2]))
 
-main = print(evaluate(C 1 :+ C 2))
+main = print(evaluate(C 5 :* C 4))
