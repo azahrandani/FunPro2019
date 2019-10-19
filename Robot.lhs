@@ -507,17 +507,27 @@ uses the following convention:
 >        -- spaceWait w
 >        spaceClose w
 
-> spiral :: Robot ()
-> spiral = penDown >> loop 1 
->  where loop n =
->          let twice = do turnRight
->                         moven n
->                         turnRight
->                         moven n
->          in cond blocked 
->               (twice >> turnRight >> moven n)
->               (twice >> loop (n+1))
+> forLoop :: [Int] -> (Int -> Robot()) -> Robot()
+> forLoop xs action = mapM_ (const action) xs
 
+> spiral :: Robot ()
+
+-- > spiral = penDown >> loop 1 
+-- >  where loop n =
+-- >          let twice = do turnRight
+-- >                         moven n
+-- >                         turnRight
+-- >                         moven n
+-- >          in cond blocked 
+-- >               (twice >> turnRight >> moven n)
+-- >               (twice >> loop (n+1))
+
+> spiral = forLoop [1..20] action
+>       where action = \i -> (turnRight >> moven i >> turnRight >> moven i)
+
+> zigzag = forLoop [1..10] action
+>       where action = \i -> (moven 5 >> turnRight >> move >> turnRight
+>           >> moven 5 >> turnLeft >> move >> turnLeft
 
 > main = runRobot (moven 5 >> turnRight >> moven 5 >> turnLeft >> moven 20  ) s0 g3
 > main0 = runRobot spiral s0 g3
