@@ -61,6 +61,7 @@ uses the following convention:
 >         , color     :: Color
 >         , treasure  :: [Position]
 >         , pocket    :: Int
+>         , energy    :: Int
 >         }
 >      deriving Show
 
@@ -72,6 +73,7 @@ uses the following convention:
 >                 , facing   = North
 >                 , treasure = tr
 >                 , pocket   = 0
+>                 , energy   = 5
 >                 }
 
 > type Position = (Int,Int)
@@ -133,10 +135,11 @@ uses the following convention:
 >             return (s, facing s `notElem` (g `at` position s))
 
 > move      :: Robot ()
-> move = cond1 (isnt blocked)
+> move = cond1 (isnt blocked && energy > 0)
 >          (Robot $ \s _ w -> do
 >             let newPos = movePos (position s) (facing s)
 >             graphicsMove w s newPos
+>             let newEnergy = (energy s) - 1
 >             return (s {position = newPos}, ())
 >          )
 
